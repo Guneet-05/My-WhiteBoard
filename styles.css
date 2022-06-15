@@ -1,0 +1,126 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+}
+
+.mainBody {
+    height: 100%;
+    width: 100%; 
+    border: 2px solid red;
+}
+
+.menuBtn {
+    position: absolute;
+    left: 3rem;
+    top: 2rem;
+    height: 3.5rem;
+    width: 3.5rem;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 2px solid violet;
+
+}
+
+.menuBtn>span {
+    font-size: 28px;
+}
+
+.toolHeader {
+    position: absolute;
+    height: 3.4rem;
+    width: 25rem;
+    left: 38vw;
+    top: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+    border: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    cursor: pointer;
+    border: 2px solid violet;
+
+}
+
+.toolHeaderAni {
+    animation-name: toolHeaderAni;
+    animation-duration: 500ms;
+    animation-iteration-count: 1;
+}
+
+@keyframes toolHeaderAni {
+    0%{transform: scale(0);}
+    100%{transform: scale(1);}
+}
+
+.penTool-Box {
+    height: 6rem;
+    width: 9rem;
+    position: absolute;
+    left: 39vw;
+    top: 6rem;
+    border-radius: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    border: 2px solid violet;
+
+}
+
+.inputPenTool {
+    height: 40%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.penToolColorOptions {
+    height: 60%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.penToolColorBox {
+    /* watch part 1.3 from 8:15 onwards */
+    height: 25px;
+    width: 25px;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+.toolColorRed {
+    background-color: red;
+}
+
+.toolColorBlue {
+    background-color: blue;
+}
+
+.toolColorGreen {
+    background-color: green;
+}
+
+.eraser-Box {
+    position: absolute;
+    left: 37rem;
+    top: 6rem;
+    height: 3rem;
+    width: 9rem;
+    border-radius: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    border: 2px solid violet;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
