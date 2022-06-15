@@ -40,7 +40,6 @@ eraser.addEventListener('click', () => {
 })
 
 let stickyNote = document.querySelector(".stickyNote");
-let stickyNotesCont = document.querySelector(".sticky-notes-cont");
 stickyNote.addEventListener('click', () => {
     let div = document.createElement('div');
     div.setAttribute('class', 'sticky-notes-cont');
@@ -84,6 +83,66 @@ stickyNote.addEventListener('click', () => {
     
     dragAndDrop(div);  
 })
+
+
+let imageNotes = document.querySelector(".imageNotes");
+imageNotes.addEventListener('click', () => {
+
+    let input = document.createElement('input');
+    input.setAttribute('type','file');
+
+    input.click();
+
+    input.addEventListener('change',() => {
+        let imgFile = input.files[0];
+        let url = URL.createObjectURL(imgFile);
+        
+        let div = document.createElement('div');
+        div.setAttribute('class', 'sticky-notes-cont');
+        div.innerHTML = `
+       <div class="sticky-notes-header">
+        <div class="StickyMinimizeButton">
+            <span class="material-icons-outlined">
+                do_not_disturb_on
+                </span>
+        </div>
+        <div class="StickyCancelButton">
+            <span class="material-icons-outlined">
+                cancel
+                </span>
+        </div>
+        </div>
+    
+        <div class="sticky-contentArea">
+        <img src = '${url}'>
+        </div>`;
+    
+        document.querySelector('body').append(div);
+        
+        let minimize = div.querySelector(".StickyMinimizeButton");
+        let minimizeStatus = false;
+        minimize.addEventListener('click',() => {
+            minimizeStatus ? minimizeStatus = false : minimizeStatus = true;
+            if(minimizeStatus) {
+                let contentArea = div.querySelector('.sticky-contentArea');
+                contentArea.style.display = 'none';
+            } else if(!minimizeStatus) {
+                let contentArea = div.querySelector('.sticky-contentArea');
+                contentArea.style.display = '';
+            }
+        })
+    
+        let remove = div.querySelector('.StickyCancelButton');
+        remove.addEventListener('click',() => {
+            remove.parentElement.parentElement.remove();
+        })
+        
+        dragAndDrop(div);  
+    })
+
+})
+
+
 
 function dragAndDrop(div) {
     div.onmousedown = function(event) {
