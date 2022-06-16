@@ -7,6 +7,9 @@ let penwidth = 2;
 let eraserColor = 'white';
 let eraserWidth = 3;
 
+let canvasUndoRedoData = [];
+tracker = 0;
+
 let tool = canvas.getContext('2d');
 tool.strokeStyle = penColor;
 
@@ -27,6 +30,9 @@ canvas.addEventListener('mousemove',(e) => {
 
 canvas.addEventListener('mouseup',() => {
     isDrawing = false;
+    let imageData = canvas.toDataURL();
+    canvasUndoRedoData.push(imageData);
+    tracker = canvasUndoRedoData.length - 1; 
 })
 
 let toolColorRed = document.querySelector('.toolColorRed');
@@ -75,3 +81,33 @@ eraserRange.addEventListener('change',() => {
 })
 
 let file_download = document.querySelector('.file_download');
+file_download.addEventListener('click',() => {
+    let url = canvas.toDataURL()
+    let a = document.createElement('a')
+    a.href = url;
+    a.download = 'whiteBoardImage.jpg'
+    a.click()
+})
+
+let undo = document.querySelector('.undo');
+undo.addEventListener('click',() => {
+    if(tracker > 0) tracker--;
+    console.log(tracker);
+    canvasDrawImageAgain(tracker,canvasUndoRedoData);
+})
+
+let redo = document.querySelector('.redo');
+redo.addEventListener('click',() => {
+    if(tracker < canvasUndoRedoData.length -1) tracker++;
+    console.log(tracker);
+    canvasDrawImageAgain(tracker,canvasUndoRedoData);
+})
+
+function canvasDrawImageAgain(tracker,canvasUndoRedoData) {
+    let imageData = canvasUndoRedoData[tracker];
+    let newImage =  new Image();
+    newImage.src = imageData;
+    newImage.onload = (e) => {
+        tool.drawImage(newImage,0,0,canvas.width,canvas.height)
+    }
+}
