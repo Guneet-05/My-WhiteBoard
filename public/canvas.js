@@ -22,7 +22,11 @@ canvas.addEventListener('mousedown',(e)=> {
 
     let data = {
         x : e.clientX,
-        y : e.clientY
+        y : e.clientY,
+        penColor : penColor,
+        eraserColor: eraserColor,
+        isEraser : isEraser,
+        width: penwidth
     }
     // beginPath(data);
     socket.emit("beginPath",data);
@@ -134,6 +138,14 @@ function canvasDrawImageAgain(obj) {
 function beginPath(data) {
     tool.beginPath()
     tool.moveTo(data.x,data.y);
+    if(data.isEraser) {
+        tool.strokeStyle = data.eraserColor;
+        // tool.lineWidth = data.eraserWidth;
+    } else {
+        tool.strokeStyle = data.penColor;
+        // tool.lineWidth = data.penwidth;
+    }
+    tool.lineWidth = data.width;
 }
 
 
