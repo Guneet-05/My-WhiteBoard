@@ -24,7 +24,8 @@ canvas.addEventListener('mousedown',(e)=> {
         x : e.clientX,
         y : e.clientY
     }
-    beginPath(data);
+    // beginPath(data);
+    socket.emit("beginPath",data);
 
 })
 
@@ -38,7 +39,8 @@ canvas.addEventListener('mousemove',(e) => {
             y : e.clientY
         }
 
-        drawStroke(data);
+        // drawStroke(data);
+        socket.emit('drawStroke',data);
 
     }
 })
@@ -108,18 +110,19 @@ let undo = document.querySelector('.undo');
 undo.addEventListener('click',() => {
     if(tracker > 0) tracker--;
     console.log(tracker);
-    canvasDrawImageAgain(tracker,canvasUndoRedoData);
+    socket.emit('undoRedo',{tracker:tracker,canvasUndoRedoData:canvasUndoRedoData});
 })
 
 let redo = document.querySelector('.redo');
 redo.addEventListener('click',() => {
     if(tracker < canvasUndoRedoData.length -1) tracker++;
     console.log(tracker);
-    canvasDrawImageAgain(tracker,canvasUndoRedoData);
+    // canvasDrawImageAgain(tracker,canvasUndoRedoData);
+    socket.emit('undoRedo',{tracker:tracker,canvasUndoRedoData:canvasUndoRedoData});
 })
 
-function canvasDrawImageAgain(tracker,canvasUndoRedoData) {
-    let imageData = canvasUndoRedoData[tracker];
+function canvasDrawImageAgain(obj) {
+    let imageData = obj.canvasUndoRedoData[obj.tracker];
     let newImage =  new Image();
     newImage.src = imageData;
     newImage.onload = (e) => {
@@ -138,3 +141,15 @@ function drawStroke(data) {
     tool.lineTo(data.x,data.y);
     tool.stroke();
 }
+
+socket.on("beginPath",(data) => {
+    beginPath(data);
+})
+
+socket.on("undoRedo",(data) => {
+    canvasDrawImageAgain(data);
+})
+
+socket.on("drawStroke",(data) => {
+    drawStroke(data);
+})

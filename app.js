@@ -9,6 +9,18 @@ let server = app.listen(5000,() => {
 })
 
 let io = socket(server);
-io.on('connection',() => {
+io.on('connection',(socket) => {
     console.log('socket .io is running');
+
+    socket.on('beginPath',(data) => {
+        io.sockets.emit("beginPath",data);
+    })
+
+    socket.on('undoRedo',(data) => {
+        io.sockets.emit("undoRedo",data);
+    })
+
+    socket.on('drawStroke',(data) => {
+        io.sockets.emit("drawStroke",data);
+    })
 })
