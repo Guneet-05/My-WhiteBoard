@@ -17,14 +17,29 @@ let isDrawing = false;
 
 canvas.addEventListener('mousedown',(e)=> {
     isDrawing = true;
-    tool.beginPath()
-    tool.moveTo(e.clientX,e.clientY);
+    // tool.beginPath()
+    // tool.moveTo(e.clientX,e.clientY);
+
+    let data = {
+        x : e.clientX,
+        y : e.clientY
+    }
+    beginPath(data);
+
 })
 
 canvas.addEventListener('mousemove',(e) => {
     if(isDrawing) {
-        tool.lineTo(e.clientX,e.clientY);
-        tool.stroke();
+        // tool.lineTo(e.clientX,e.clientY);
+        // tool.stroke();
+
+        let data = {
+            x : e.clientX,
+            y : e.clientY
+        }
+
+        drawStroke(data);
+
     }
 })
 
@@ -110,4 +125,16 @@ function canvasDrawImageAgain(tracker,canvasUndoRedoData) {
     newImage.onload = (e) => {
         tool.drawImage(newImage,0,0,canvas.width,canvas.height)
     }
+}
+
+
+function beginPath(data) {
+    tool.beginPath()
+    tool.moveTo(data.x,data.y);
+}
+
+
+function drawStroke(data) {
+    tool.lineTo(data.x,data.y);
+    tool.stroke();
 }
