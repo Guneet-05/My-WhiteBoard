@@ -1,0 +1,24 @@
+{
+  "name": "myopenboard",
+  "version": "1.0.0",
+  "description": "My Whiteboard is a real-time whiteboard web-app.",
+  "main": "canvas.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Guneet-05/My-WhiteBoard.git"
+  },
+  "author": "Guneet Malhotra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Guneet-05/My-WhiteBoard/issues"
+  },
+  "homepage": "https://github.com/Guneet-05/My-WhiteBoard#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16",
+    "socket.io": "^4.5.1"
+  }
+}
